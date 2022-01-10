@@ -1,3 +1,4 @@
+const BRUSH_TIME = 1500;
 const activeToolEl = document.getElementById('active-tool');
 const brushColorBtn = document.getElementById('brush-color');
 const brushIcon = document.getElementById('brush');
@@ -62,6 +63,10 @@ eraser.addEventListener('click', () => {
   currentSize = 50;
 });
 
+const switchToBrushTimeout = (ms) => {
+  setTimeout(switchToBrush, ms);
+};
+
 // Switch back to Brush
 function switchToBrush() {
   isEraser = false;
@@ -90,7 +95,7 @@ clearCanvasBtn.addEventListener('click', () => {
   drawnArray = [];
   // Active Tool
   activeToolEl.textContent = 'Canvas Cleared';
-  setTimeout(switchToBrush, 1500);
+  switchToBrushTimeout(BRUSH_TIME);
 });
 
 // Draw what is stored in DrawnArray
@@ -174,7 +179,7 @@ saveStorageBtn.addEventListener('click', () => {
   localStorage.setItem('#paintClone', JSON.stringify(drawnArray));
   // Active Tool
   activeToolEl.textContent = 'Canvas Saved';
-  setTimeout(switchToBrush, 1500);
+  switchToBrushTimeout(BRUSH_TIME);
 });
 
 // Load from Local Storage
@@ -184,10 +189,10 @@ loadStorageBtn.addEventListener('click', () => {
     restoreCanvas();
     // Active Tool
     activeToolEl.textContent = 'Canvas Loaded';
-    setTimeout(switchToBrush, 1500);
+    switchToBrushTimeout(BRUSH_TIME);
   } else {
     activeToolEl.textContent = 'No backup found';
-    setTimeout(switchToBrush, 1500);
+    switchToBrushTimeout(BRUSH_TIME);
   }
 });
 
@@ -196,7 +201,7 @@ clearStorageBtn.addEventListener('click', () => {
   localStorage.removeItem('#paintClone');
   // Active Tool
   activeToolEl.textContent = 'Local Storage Cleared';
-  setTimeout(switchToBrush, 1500);
+  switchToBrushTimeout(BRUSH_TIME);
 });
 
 // Download Image
@@ -205,7 +210,7 @@ downloadBtn.addEventListener('click', () => {
   downloadBtn.download = 'paint-clone-file.jpeg';
   // Active Tool
   activeToolEl.textContent = 'Image File Saved';
-  setTimeout(switchToBrush, 1500);
+  switchToBrushTimeout(BRUSH_TIME);
 });
 
 // Event Listener
